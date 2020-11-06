@@ -53,6 +53,15 @@ class Books extends Component {
   }
 
   render() {
+    const sortedBooks = this.state.books.sort((a, b) => {
+      if (this.state.sort === 'Newest') {
+        return parseInt(b.volumeInfo.publishedDate.substring(0, 4)) - parseInt(a.volumeInfo.publishedDate.substring(0, 4))
+      }
+      else if (this.state.sort === 'Oldest') {
+        return parseInt(a.volumeInfo.publishedDate.substring(0, 4)) - parseInt(b.volumeInfo.publishedDate.substring(0, 4))
+      }
+    })
+
     return (
       <div>
         <SearchArea
@@ -61,7 +70,7 @@ class Books extends Component {
           handleSort={this.handleSort}
         />
         <BookList
-          books={this.state.books}
+          books={sortedBooks}
         />
       </div>
     );
