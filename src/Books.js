@@ -20,7 +20,8 @@ class Books extends Component {
       .query({ q: this.state.searchField })
       .then((data) => {
         console.log(data)
-        this.setState({ books: [...data.body.items] })
+        const cleanData = this.cleanData(data)
+        this.setState({ books: cleanData })
       })
   }
 
@@ -33,6 +34,22 @@ class Books extends Component {
     this.setState({
       sort: e.target.value
     })
+  }
+
+  cleanData = (data) => {
+    const cleanedData = data.body.items.map((book) => {
+      if (book.volumeInfo.hasOwnProperty('publishedDate') === false) {
+        book.volumeInfo['publishedDate'] = '0000'
+      }
+
+      else if (book.volumeInfo.hasOwnProperty('imageLinks') === false) {
+        book.volumeInfo['imageLinks'] = { thumbnail: "https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg" }
+      }
+
+      return book;
+    })
+
+    return cleanedData
   }
 
   render() {
