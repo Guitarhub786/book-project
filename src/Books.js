@@ -43,7 +43,7 @@ class Books extends Component {
       }
 
       else if (book.volumeInfo.hasOwnProperty('imageLinks') === false) {
-        book.volumeInfo['imageLinks'] = { thumbnail: "https://www.ecpgr.cgiar.org/fileadmin/templates/ecpgr.org/Assets/images/No_Image_Available.jpg" }
+        book.volumeInfo['imageLinks'] = { thumbnail: "https://vignette.wikia.nocookie.net/pandorahearts/images/a/ad/Not_available.jpg/revision/latest?cb=20141028171337" }
       }
 
       return book;
